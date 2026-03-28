@@ -1,0 +1,4 @@
+Renaming file
+    mv flask.py app.py
+The most important command to apply all these changes and clear the cache:
+    docker-compose up --build

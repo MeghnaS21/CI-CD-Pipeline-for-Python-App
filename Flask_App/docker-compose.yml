@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Service 1 — Aapki Flask App
+  web:
+    build: .
+    command: python app.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+
+  # Service 2 — Redis Database
+  redis:
+    image: redis:alpine
+
+### Har Line Ka Matlab:
+
+### services     →  Kitne containers chalane hain
+### web          →  Flask app container ka naam
+### build: .     →  Dockerfile se image banao
+### ports        →  5000:5000 — bahar:andar
+### depends_on   →  Pehle redis start ho, phir web
+### redis        →  Redis container — ready made image use karo 
