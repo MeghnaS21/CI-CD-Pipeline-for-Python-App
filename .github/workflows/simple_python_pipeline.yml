@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
   
       - name: build docker image
-        run: docker build -t simple_python_app:latest .
+        run: docker build -t simple_python_app:latest -f Simple_Python_App/Dockerfile .
   
       - run: |
           docker run simple_python_app:latest
