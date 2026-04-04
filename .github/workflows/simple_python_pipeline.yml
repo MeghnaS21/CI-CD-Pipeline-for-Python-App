@@ -1,0 +1,24 @@
+name: Simple Python app pipeline
+
+on: 
+  push:
+    branches: [main]
+    paths:
+      - 'Simple_Python_App/**'
+
+jobs:
+  build:  
+    runs-on:  ubuntu-latest
+    
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+  
+      - name: build docker image
+        run: docker build -t simple_python_app:latest .
+  
+      - run: |
+          docker run -d --name test-container simple_python_app:latest
+          sleep 5
+          docker logs test-container
+          docker stop test-container
