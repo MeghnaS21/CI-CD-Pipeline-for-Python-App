@@ -1,21 +1,17 @@
-# Stage 1: Build Stage
+# Stage 1: Build
 FROM python:3.10-slim AS builder
-# Use a generic name like /build to avoid context confusion
 WORKDIR /build
-# This copies app.py from your folder into /build/app.py
-COPY . . 
+# Because the context is now the folder, app.py is right here!
+COPY . .
 
-# Stage 2: Runtime Stage
+# Stage 2: Runtime
 FROM python:3.10-alpine
-# Standard production directory
 WORKDIR /app
-
-# IMPORTANT: We copy the CONTENTS of /build into the current WORKDIR (./)
+# Copy from the builder's /build/ into the current /app/
 COPY --from=builder /build/ .
 
-# SRE Best Practice: Run as non-root
+# Security best practice
 RUN adduser -D srerunner
 USER srerunner
 
-# Since WORKDIR is /app, python looks for app.py right here
 CMD ["python", "app.py"]
