@@ -3,6 +3,8 @@ name: Simple Python app pipeline
 on: 
   push:
     branches: [main]
+    paths:
+      - 'Simple_Python_App/**'
     
 
 jobs:
